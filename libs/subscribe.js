@@ -3,10 +3,10 @@ import { mutate } from 'swr'
 let latestData = null
 
 // setup ws and broadcast to all SWRs
-const GRAPHQL_ENDPOINT_WS = 'wss://swr-hasura-graphql.herokuapp.com/v1/graphql';
+const GRAPHQL_ENDPOINT_WS = `wss://${process.env.GRAPHQL_ENDPOINT}`;
 
-const headers = {'Content-Type': 'application/json'};
-
+const headers = {'Content-Type': 'application/json',"x-hasura-admin-secret": process.env.SECRET};
+debugger
 const subscribe = async(...args) => {
 
 	if(typeof window !== 'undefined') {

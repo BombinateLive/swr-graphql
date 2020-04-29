@@ -4,7 +4,7 @@ import fetch from '../libs/fetch'
 const uuidv1 = require('uuid/v1');
 
 const query = {
-  'query': 'query { users(limit: 10, order_by: {created_at: desc}) { id name } }'
+  'query': 'query { user(limit: 10, order_by: {createdAt: desc}) { id firstName } }'
 };
 
 const getData = async(...args) => {
@@ -18,11 +18,11 @@ export default () => {
   async function handleSubmit(event) {
     event.preventDefault()
     // mutate current data to optimistically update the UI
-    mutate(query, {users: [...data.users, {id: uuidv1(), name: text}]}, false)
+    mutate(query, {user: [...data.user, {id: uuidv1(), firstName: text}]}, false)
     // send text to the API
     const mutation = {
-      'query': 'mutation users($name: String!) { insert_users(objects: [{name: $name}]) { affected_rows } }',
-      'variables': { name: text}
+      'query': 'mutation user($firstName: String!) { insert_user(objects: [{firstName: $firstName}]) { affected_rows } }',
+      'variables': { firstName: text}
     };
     await fetch(mutation);
     // revalidate
@@ -41,7 +41,7 @@ export default () => {
       <button>Create</button>
     </form>
     <ul>
-      {data ? data.users.map(user => <li key={user.id}>{user.name}</li>) : 'loading...'}
+      {data ? data.user.map(user => <li key={user.id}>{user.firstName}</li>) : 'loading...'}
     </ul>
   </div>
 }

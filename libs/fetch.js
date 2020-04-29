@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-unfetch'
 
-const GRAPHQL_ENDPOINT = 'https://swr-hasura-graphql.herokuapp.com/v1/graphql';
+const GRAPHQL_ENDPOINT = `http://${process.env.GRAPHQL_ENDPOINT}`;
 
-const headers = {'Content-Type': 'application/json'};
+const headers = {'Content-Type': 'application/json',"x-hasura-admin-secret": process.env.SECRET};
 
 const _fetch = async(...args) => {
 

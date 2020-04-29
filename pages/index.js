@@ -3,7 +3,7 @@ import fetch from '../libs/fetch';
 import useSWR from 'swr'
 
 const query = {
-  'query': 'query { users(limit:10, order_by:{created_at: desc}) { id name } }'
+  'query': 'query { user(limit:10, order_by:{createdAt: desc}) { id firstName } }'
 };
 
 const getData = async(...args) => {
@@ -21,12 +21,12 @@ export default () => {
 
   return ( 
     <div style={{ textAlign: 'center' }}>
-      <h1>Users from database</h1>
+      <h1>User from database</h1>
       <div>
       {
-        data.users.map(user => 
+        data.user.map(user => 
           <div key={user.id}>
-            <p>{user.name}</p>
+            <p>{user.firstName}</p>
           </div>
         )
       }

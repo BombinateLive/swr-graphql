@@ -5,10 +5,10 @@ import useSWR from 'swr'
 
 const USER_SUBSCRIPTION = `
   subscription {
-    users(order_by: {created_at: desc}, limit: 10) {
+    user(order_by: {createdAt: desc}, limit: 10) {
       id
-      name
-      created_at
+      firstName
+      createdAt
     }
   }
 `;
@@ -25,12 +25,12 @@ export default () => {
 
   return ( 
     <div style={{ textAlign: 'center' }}>
-      <h1>Subscribed to Latest 10 users from the database</h1>
+      <h1>Subscribed to Latest 10 user from the database</h1>
       <div>
       {
-        data.users.map(user => 
+        data.user.map(user => 
           <div key={user.id}>
-            <p>{user.name}</p>
+            <p>{user.firstName}</p>
           </div>
         )
       }
